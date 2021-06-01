@@ -10,7 +10,14 @@ import {
 } from "./styled";
 import BloodDrop from "../../../../assets/images/blood-drop.png";
 import AdsImg from "../../../../assets/images/ads.png";
-import { FaBell, FaCog, FaHome, FaMap, FaUserAlt } from "react-icons/fa";
+import {
+    FaBell,
+    FaCog,
+    FaHome,
+    FaMap,
+    FaUserAlt,
+    FaHandsHelping,
+} from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
 
 const SideNavbar = () => {
@@ -43,15 +50,22 @@ const SideNavbar = () => {
                         "notifications"
                     )}
                 >
-                    <Link to="/home">
+                    <Link to="/notifications">
                         <FaBell /> Notifications
                     </Link>
                 </NavItem>
                 <NavItem
-                    isActive={history.location.pathname.includes("donors")}
+                    isActive={history.location.pathname.includes("donations")}
                 >
-                    <Link to="/home">
+                    <Link to="/donations">
                         <FaMap /> Donors
+                    </Link>
+                </NavItem>
+                <NavItem
+                    isActive={history.location.pathname.includes("requests")}
+                >
+                    <Link to="/requests">
+                        <FaHandsHelping /> Requests
                     </Link>
                 </NavItem>
                 <NavItem
