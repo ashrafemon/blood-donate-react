@@ -5,7 +5,7 @@ const routes = [
         path: "/",
         exact: true,
         name: "Starter",
-        component: React.lazy(() => import("../components/Starter")),
+        component: React.lazy(() => import("../pages/Starter")),
         meta: {
             requiresAuth: false,
         },
@@ -14,7 +14,7 @@ const routes = [
         path: "/login",
         exact: true,
         name: "Login",
-        component: React.lazy(() => import("../components/Auth/Login")),
+        component: React.lazy(() => import("../pages/Login")),
         meta: {
             requiresAuth: false,
         },
@@ -23,7 +23,7 @@ const routes = [
         path: "/register",
         exact: true,
         name: "Register",
-        component: React.lazy(() => import("../components/Auth/Register")),
+        component: React.lazy(() => import("../pages/Register")),
         meta: {
             requiresAuth: false,
         },
@@ -32,7 +32,7 @@ const routes = [
         path: "/home",
         exact: true,
         name: "Home",
-        component: React.lazy(() => import("../components/User/Home")),
+        component: React.lazy(() => import("../pages/Home")),
         meta: {
             requiresAuth: true,
         },
@@ -41,7 +41,7 @@ const routes = [
         path: "/profile",
         exact: true,
         name: "Profile",
-        component: React.lazy(() => import("../components/User/Profile")),
+        component: React.lazy(() => import("../pages/Profile")),
         meta: {
             requiresAuth: true,
         },
@@ -50,7 +50,7 @@ const routes = [
         path: "/notifications",
         exact: true,
         name: "Notification",
-        component: React.lazy(() => import("../components/User/Notifications")),
+        component: React.lazy(() => import("../pages/Notifications")),
         meta: {
             requiresAuth: true,
         },
@@ -59,7 +59,7 @@ const routes = [
         path: "/donations",
         exact: true,
         name: "Donations",
-        component: React.lazy(() => import("../components/User/Donations")),
+        component: React.lazy(() => import("../pages/Donations")),
         meta: {
             requiresAuth: true,
         },
@@ -68,7 +68,7 @@ const routes = [
         path: "/requests",
         exact: true,
         name: "Requests",
-        component: React.lazy(() => import("../components/User/Requests")),
+        component: React.lazy(() => import("../pages/Requests")),
         meta: {
             requiresAuth: true,
         },

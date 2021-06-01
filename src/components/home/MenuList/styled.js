@@ -1,0 +1,61 @@
+import { makeStyles } from "@material-ui/core";
+
+export const useStyles = makeStyles({
+    title: {
+        fontWeight: 600,
+        color: "#000",
+        marginBottom: 20,
+    },
+    list: {
+        listStyle: "none",
+        margin: 0,
+        marginBottom: 40,
+        padding: 0,
+        display: "flex",
+        flexWrap: "wrap",
+    },
+    item: {
+        width: "25%",
+        boxSizing: "border-box",
+        cursor: "pointer",
+        userSelect: "none",
+        overflow: "hidden",
+        position: "relative",
+    },
+    avatarBox: {
+        width: "60px",
+        height: "60px",
+        position: "relative",
+        textAlign: "center",
+        margin: "5px auto",
+    },
+    avatar: {
+        width: "100%",
+        height: "100%",
+        objectFit: "contain",
+        border: "3px solid #fff",
+        boxShadow: "0 0 5px #E2E3E5",
+        borderRadius: "50%",
+        boxSizing: "border-box",
+    },
+    text: {
+        color: "#000",
+        textAlign: "center",
+    },
+    badgeCount: {
+        display: "inline-block",
+        width: 15,
+        height: 15,
+        boxSizing: "border-box",
+        padding: "2px 4px",
+        backgroundColor: "#C70100",
+        color: "#fff",
+        borderRadius: "50%",
+        lineHeight: 1,
+        fontSize: 11,
+        position: "absolute",
+        top: 0,
+        right: 5,
+        zIndex: 99,
+    },
+});
