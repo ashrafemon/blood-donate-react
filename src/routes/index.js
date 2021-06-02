@@ -73,6 +73,15 @@ const routes = [
             requiresAuth: true,
         },
     },
+    {
+        path: "*",
+        exact: true,
+        name: "NotFound",
+        component: React.lazy(() => import("../pages/NotFound")),
+        meta: {
+            requiresAuth: false,
+        },
+    },
 ];
 
 export default routes;

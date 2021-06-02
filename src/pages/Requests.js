@@ -64,22 +64,28 @@ const Requests = () => {
                                         placeholder="New York"
                                         type="text"
                                         label="Area or City"
+                                        value=""
+                                        changeHandler={() => {}}
                                     />
                                     <Grid container spacing={2}>
                                         <Grid item md={6} xs={12}>
                                             <TextField
-                                                id="area"
-                                                placeholder="New York"
+                                                id="blood_group"
+                                                placeholder="O+"
                                                 type="text"
-                                                label="Area or City"
+                                                label="Blood Group"
+                                                value=""
+                                                changeHandler={() => {}}
                                             />
                                         </Grid>
                                         <Grid item md={6} xs={12}>
                                             <TextField
-                                                id="area"
-                                                placeholder="New York"
+                                                id="relation"
+                                                placeholder="Brother"
                                                 type="text"
-                                                label="Area or City"
+                                                label="I am his/her"
+                                                value=""
+                                                changeHandler={() => {}}
                                             />
                                         </Grid>
                                     </Grid>

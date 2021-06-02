@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaShareAlt } from "react-icons/fa";
-import UserLayout from "../layouts/UserLayout";
+// import badges from "../constants/badges";
+import { useDispatch, useSelector } from "react-redux";
 import BloodDropImg from "../assets/images/bloodDrop.svg";
 import {
     BadgeItem,
@@ -34,25 +35,36 @@ import {
     NextDonateProgressBar,
     NextDonateText,
 } from "../components/profile/styled";
-import badges from "../constants/badges";
+import UserLayout from "../layouts/UserLayout";
+import { fetchBadges } from "../store/actions/profileActions";
 
 const Profile = () => {
+    const dispatch = useDispatch();
+    const badges = useSelector((state) => state.profile.badges);
+    const currentUser = useSelector((state) => state.auth.currentUser);
+
+    useEffect(() => {
+        dispatch(fetchBadges());
+    }, [dispatch]);
+
     return (
         <UserLayout>
             <FlexRow>
                 <FlexMyInfoCol>
                     <Card>
                         <CardContent>
-                            <CardContentImage image="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg">
+                            <CardContentImage image="https://images.pexels.com/photos/747964/pexels-photo-747964.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
                                 <CardContentImageHeading>
-                                    Ashraf Emon
+                                    {currentUser.name}
                                 </CardContentImageHeading>
                                 <CardContentImageSubHeading>
                                     Beginner Donor
                                 </CardContentImageSubHeading>
                                 <BloodGroup>
                                     <BloodGroupImage src={BloodDropImg} />
-                                    <BloodGroupText>AB+</BloodGroupText>
+                                    <BloodGroupText>
+                                        {currentUser.profile.blood_group}
+                                    </BloodGroupText>
                                 </BloodGroup>
                             </CardContentImage>
 
@@ -75,7 +87,7 @@ const Profile = () => {
                                             src={item.avatar}
                                         />
                                         <BadgeListItemText>
-                                            {item.text}
+                                            {item.name}
                                         </BadgeListItemText>
                                     </BadgeListItem>
                                 ))}
@@ -150,7 +162,7 @@ const Profile = () => {
                                     <BadgeItem key={index}>
                                         <BadgeItemAvatar src={item.avatar} />
                                         <BadgeItemText>
-                                            {item.text}
+                                            {item.name}
                                         </BadgeItemText>
                                     </BadgeItem>
                                 ))}

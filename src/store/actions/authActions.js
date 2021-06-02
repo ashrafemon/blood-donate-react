@@ -1,13 +1,13 @@
-import * as types from "../types";
-import { API_URL } from "../../utils/urls";
-import { formDataBuilder, jsonTypeHeaders } from "../../utils/helpers";
 import { toast } from "react-toastify";
+import { api_routes } from "../../constants/urls";
+import { formDataBuilder, jsonTypeHeaders } from "../../utils/helpers";
+import * as types from "../types";
 
 const TOKEN = localStorage.getItem("token");
 
 // Mutations
 export const fetchBloodGroups = () => (dispatch) => {
-    fetch(API_URL + "blood_group", {
+    fetch(api_routes.fetch_blood_groups, {
         method: "GET",
         headers: jsonTypeHeaders,
     })
@@ -26,7 +26,8 @@ export const fetchBloodGroups = () => (dispatch) => {
 
 export const login = (data) => (dispatch) => {
     dispatch({ type: types.TOGGLE_BUSY_BOX, payload: true });
-    fetch(API_URL + "auth/login", {
+
+    fetch(api_routes.auth_login, {
         method: "POST",
         headers: jsonTypeHeaders,
         body: JSON.stringify(data),
@@ -59,10 +60,9 @@ export const login = (data) => (dispatch) => {
 
 export const register = (data) => (dispatch) => {
     dispatch({ type: types.TOGGLE_BUSY_BOX, payload: true });
-
     let formedData = formDataBuilder(data);
 
-    fetch(API_URL + "auth/register", {
+    fetch(api_routes.auth_register, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -90,7 +90,7 @@ export const register = (data) => (dispatch) => {
 
 export const logout = () => (dispatch) => {
     dispatch({ type: types.TOGGLE_BUSY_BOX, payload: true });
-    fetch(API_URL + "auth/logout", {
+    fetch(api_routes.auth_logout, {
         method: "POST",
         headers: {
             ...jsonTypeHeaders,
@@ -111,7 +111,8 @@ export const logout = () => (dispatch) => {
 };
 
 export const fetchMe = () => (dispatch) => {
-    fetch(API_URL + "auth/me", {
+    dispatch({ type: types.TOGGLE_BUSY_BOX, payload: true });
+    fetch(api_routes.auth_me, {
         method: "GET",
         headers: {
             ...jsonTypeHeaders,
@@ -122,6 +123,7 @@ export const fetchMe = () => (dispatch) => {
         .then((res) => {
             console.log(res);
             if (res.status === "done") {
+                dispatch({ type: types.TOGGLE_BUSY_BOX, payload: false });
                 dispatch({
                     type: types.CURRENT_USER,
                     payload: {
@@ -132,5 +134,8 @@ export const fetchMe = () => (dispatch) => {
                 });
             }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+            console.log(err);
+            dispatch({ type: types.TOGGLE_BUSY_BOX, payload: false });
+        });
 };

@@ -1,15 +1,19 @@
 import React, { Suspense, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import routes from "./routes";
-import LoadingPage from "./components/shared/LoadingPage";
-import { useDispatch } from "react-redux";
-import { fetchMe } from "./store/actions/authActions";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./assets/css/style.css";
+import ProtectedRoute from "./components/routes/ProtectedRoutes";
+import PublicRoute from "./components/routes/PublicRoutes";
+import LoadingPage from "./components/shared/LoadingPage";
+import routes from "./routes";
+import { fetchMe } from "./store/actions/authActions";
 
 const App = () => {
     const dispatch = useDispatch();
+    const busyBox = useSelector((state) => state.auth.busyBox);
+    const isAuthenticate = useSelector((state) => state.auth.isAuthenticate);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -19,20 +23,34 @@ const App = () => {
         }
     }, [dispatch]);
 
+    if (busyBox) {
+        return <LoadingPage />;
+    }
+
     return (
         <BrowserRouter>
             <Suspense fallback={<LoadingPage />}>
                 <ToastContainer />
                 <Switch>
-                    {routes.map((item, index) => (
-                        <Route
-                            key={index}
-                            exact={item.exact}
-                            path={item.path}
-                            component={item.component}
-                            name={item.name}
-                        />
-                    ))}
+                    {routes.map((item, i) =>
+                        item.meta.requiresAuth ? (
+                            <ProtectedRoute
+                                isAuthenticate={isAuthenticate}
+                                key={i}
+                                path={item.path}
+                                exact={item.exact}
+                                component={item.component}
+                            />
+                        ) : (
+                            <PublicRoute
+                                isAuthenticate={isAuthenticate}
+                                key={i}
+                                path={item.path}
+                                exact={item.exact}
+                                component={item.component}
+                            />
+                        )
+                    )}
                 </Switch>
             </Suspense>
         </BrowserRouter>
